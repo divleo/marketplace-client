@@ -1,6 +1,12 @@
-/*.App {*/
-/*  text-align: center;*/
-/*}*/
+#root {
+  height: 100%;
+}
+
+.layout {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
 
 .container {
   width: 100%;
@@ -34,7 +40,7 @@
   }
 }
 
-.logo {
+.logo-container {
   width: 120px;
   height: 31px;
   background: rgba(255, 255, 255, 0.2);
@@ -42,20 +48,21 @@
   float: left;
 }
 
-.App-logo {
+.logo-container__logo {
   max-width: 100%;
   max-height: 100%;
   display: block;
   pointer-events: none;
+  margin: 0 auto;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+  .logo-container__logo {
+    animation: logo-container__logo-spin infinite 20s linear;
   }
 }
 
-@keyframes App-logo-spin {
+@keyframes logo-container__logo-spin {
   from {
     transform: rotate(0deg);
   }
@@ -68,4 +75,10 @@
   background: #fff;
   padding: 24px;
   min-height: 280px;
+}
+
+.footer {
+  text-align: center;
+  margin-top: auto;
+  border: 1px solid black;
 }
