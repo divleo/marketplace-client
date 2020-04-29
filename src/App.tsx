@@ -4,7 +4,7 @@ import { Layout, Menu, Breadcrumb, Table } from 'antd';
 
 import './App.css';
 
-import logo from './logo.svg';
+import Spinner from './components/spinner/spinner.component';
 
 type Offer = {
   key: number;
@@ -17,6 +17,7 @@ const { Header, Content, Footer } = Layout;
 
 const App = () => {
   const [offers, setOffers] = useState<Offer[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,7 +34,7 @@ const App = () => {
       setOffers(offers);
     };
 
-    fetchData();
+    fetchData().then(() => setIsLoading(false));
   }, []);
 
   const columns = [
@@ -58,10 +59,7 @@ const App = () => {
     <Layout className="layout">
       <Header>
         <div className="container">
-          <div className="logo-container">
-            <img src={logo} className="logo-container__logo" alt="logo" />
-          </div>
-          <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
+          <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
             <Menu.Item key="1">nav 1</Menu.Item>
             <Menu.Item key="2">nav 2</Menu.Item>
             <Menu.Item key="3">nav 3</Menu.Item>
@@ -77,11 +75,15 @@ const App = () => {
             <Breadcrumb.Item>App</Breadcrumb.Item>
           </Breadcrumb>
           <div className="site-layout-content">
-            <Table dataSource={offers} columns={columns} />
+            {isLoading ? (
+              <Spinner />
+            ) : (
+              <Table dataSource={offers} columns={columns} />
+            )}
           </div>
-          {console.log(offers)}
         </div>
       </Content>
+
       <Footer className="footer">
         <div className="container">
           <span>© {new Date().getFullYear()} / Marketplace</span>
